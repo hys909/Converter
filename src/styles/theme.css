@@ -29,8 +29,8 @@ body {
 .currency-item .box-style:last-child { flex: 1; justify-content: flex-end; padding-right: 20px; font-family: monospace; font-size: 1.6rem; }
 .active-row .box-style { background: #a67c00 !important; }
 .header-icons { display: flex; gap: 15px; font-size: 1.4rem; }
-.keypad { display: grid; grid-template-columns: repeat(4, 1fr) !important; gap: 12px; margin-top: 25px; padding: 0 30px; }
-.num-key { background-color: #505050; border: none; border-radius: 16px; height: 65px; color: white; font-size: 1.8rem; font-weight: 500; }
+.keypad { position: fixed; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(4, 1fr) !important; gap: 6px; padding: 10px 30px; padding-bottom: 30px; background-color: var(--bg-color); z-index: 1000; }
+.keypad button { flex: 1; height: 50px; border-radius: 12px; font-size: 1.5rem; color: #fff; border: none; cursor: pointer; }
 .func-key { background-color: #a5a5a5; border: none; border-radius: 16px; height: 65px; color: #000; font-size: 1.8rem; font-weight: 500; }
 .ops-key { background-color: #ff9f0a; border: none; border-radius: 16px; height: 65px; color: white; font-size: 1.8rem; font-weight: 500; }
 
