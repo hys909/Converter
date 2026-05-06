@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/theme.css';
+import './styles/theme.css?v=2';
 import CurrencySelector from './components/CurrencySelector';
 import Calculator from './components/Calculator';
 import { currencies } from './constants/currencies';
@@ -91,12 +91,12 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container-v2">
       {page === 'main' ? (
         <div id="main-page">
           <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'25px', padding:'0 30px'}}>
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-              <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Neo</div>
+              <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Taiwan</div>
               <div className="header-icons">
                 <span>🔄</span> <span>🏦</span> <span>⚙️</span>
               </div>
