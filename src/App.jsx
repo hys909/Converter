@@ -93,9 +93,14 @@ function App() {
   return (
     <div className="app-container">
       {page === 'main' ? (
-        <div id="main-page" style={{ paddingRight: '30px' }}>
-          <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'25px', marginLeft:'30px'}}>
-              <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Taiwan</div>
+        <div id="main-page">
+          <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'25px', padding:'0 30px'}}>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+              <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Neo</div>
+              <div className="header-icons">
+                <span>🔄</span> <span>🏦</span> <span>⚙️</span>
+              </div>
+            </div>
             <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace'}}>
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
             </div>
@@ -103,18 +108,18 @@ function App() {
           
           <div className="currency-list">
             {currencyData.map((item, idx) => (
-              <div key={idx} className={`currency-item ${activeIdx === idx ? 'active-row' : ''}`} onClick={() => selectRow(idx)} style={{marginLeft: '30px'}}>
-                <div className="box-style" style={{flex:'0 0 110px', cursor:'pointer', paddingLeft:'25px'}} onClick={() => { setSelectedRow(idx); setPage('selector'); }}>
+              <div key={idx} className={`currency-item ${activeIdx === idx ? 'active-row' : ''}`} onClick={() => selectRow(idx)}>
+                <div className="box-style" onClick={() => { setSelectedRow(idx); setPage('selector'); }}>
                   <img src={`https://flagcdn.com/w40/${item.flag}.png`} width="32" height="32" style={{borderRadius:'50%'}} alt={item.code} />
                   <span style={{marginLeft:'10px', fontWeight:'bold'}}>{item.code}</span>
                 </div>
-                <div className="box-style" style={{flex:1, justifyContent:'flex-end', fontFamily:'monospace', fontSize:'1.6rem', paddingRight:'20px'}}>
+                <div className="box-style">
                   {activeIdx === idx ? displayValue : amounts[idx]}
                 </div>
               </div>
             ))}
           </div>
-          <Calculator onKeypad={handleKeypad} style={{marginLeft: '30px'}} />
+          <Calculator onKeypad={handleKeypad} />
         </div>
       ) : (
         <CurrencySelector onSelect={(c) => { 

@@ -23,10 +23,13 @@ body {
 }
 
 .currency-list { display: flex; flex-direction: column; gap: 8px; }
-.currency-item { display: flex; gap: 10px; margin-bottom: 8px; cursor: pointer; }
-.active-row .box-style { background: #5c4e36; }
-
-.keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 25px; }
+.currency-item { display: flex; gap: 8px; margin-bottom: 8px; cursor: pointer; padding: 0 30px; }
+.currency-item > div { height: 65px; border-radius: 16px; display: flex; align-items: center; }
+.currency-item .box-style:first-child { flex: 0 0 110px; justify-content: flex-start; padding-left: 15px; }
+.currency-item .box-style:last-child { flex: 1; justify-content: flex-end; padding-right: 20px; font-family: monospace; font-size: 1.6rem; }
+.active-row .box-style { background: #a67c00 !important; }
+.header-icons { display: flex; gap: 15px; font-size: 1.4rem; }
+.keypad { display: grid; grid-template-columns: repeat(4, 1fr) !important; gap: 12px; margin-top: 25px; padding: 0 30px; }
 .num-key { background-color: #505050; border: none; border-radius: 16px; height: 65px; color: white; font-size: 1.8rem; font-weight: 500; }
 .func-key { background-color: #a5a5a5; border: none; border-radius: 16px; height: 65px; color: #000; font-size: 1.8rem; font-weight: 500; }
 .ops-key { background-color: #ff9f0a; border: none; border-radius: 16px; height: 65px; color: white; font-size: 1.8rem; font-weight: 500; }
