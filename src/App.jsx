@@ -12,7 +12,7 @@ function App() {
     { code: 'JPY', flag: 'jp' }, { code: 'CNY', flag: 'cn' }, { code: 'KRW', flag: 'kr' }
   ]);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [displayValue, setDisplayValue] = useState('1000');
+  const [displayValue, setDisplayValue] = useState('1');
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }));
   const [rates, setRates] = useState({ TWD: 1 });
 
@@ -59,7 +59,7 @@ function App() {
     }
     else if (key === '%') {
       setDisplayValue(prev => {
-        const parts = prev.split(/[\+\-×÷]/);
+        const parts = prev.split(/[\\+\\-×÷]/);
         const lastPart = parts[parts.length - 1];
         const processed = (parseFloat(lastPart) / 100).toString();
         return prev.slice(0, -lastPart.length) + processed;
@@ -75,7 +75,7 @@ function App() {
       try { 
         const expression = displayValue.replace(/×/g, '*').replace(/÷/g, '/');
         const result = eval(expression);
-        setDisplayValue(result.toString()); 
+        setDisplayValue(Number.isInteger(result) ? result.toString() : result.toFixed(2));
         setIsNewInput(true);
       } catch { 
         setDisplayValue('Error'); 
@@ -86,32 +86,30 @@ function App() {
 
   const selectRow = (idx) => {
     setActiveIdx(idx);
-    setDisplayValue('1000');
+    setDisplayValue('1');
     setIsNewInput(true);
   };
 
   return (
     <div className="app-container-v2">
       {page === 'main' ? (
-        <div id="main-page">
-          <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'25px', padding:'0 30px'}}>
-            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <div id="main-page" style={{display: 'flex', flexDirection: 'column', height: '100dvh'}}>
+          <header className="header">
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
               <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Taiwan</div>
-              <div className="header-icons">
-                <span>🔄</span> <span>🏦</span> <span>⚙️</span>
-              </div>
             </div>
-            <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace'}}>
-                {new Date().toLocaleDateString('zh-TW')} {currentTime}
+            <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace', display: 'flex', justifyContent: 'space-between'}}>
+                <span>{new Date().toLocaleDateString('zh-TW')} {currentTime}</span>
+                <span style={{color: '#ffffff'}}>v26.05.06</span>
             </div>
           </header>
           
-          <div className="currency-list" style={{ flex: 1, overflowY: "auto", paddingBottom: "10px" }}>
+          <div className="currency-list">
             {currencyData.map((item, idx) => (
               <div key={idx} className={`currency-item ${activeIdx === idx ? 'active-row' : ''}`} onClick={() => selectRow(idx)}>
                 <div className="box-style" onClick={() => { setSelectedRow(idx); setPage('selector'); }}>
-                  <img src={`https://flagcdn.com/w40/${item.flag}.png`} width="32" height="32" style={{borderRadius:'50%'}} alt={item.code} />
-                  <span style={{marginLeft:'10px', fontWeight:'bold'}}>{item.code}</span>
+                  <img src={`https://flagcdn.com/w40/${item.flag}.png`} width="32" height="32" style={{borderRadius:'50%', flexShrink: 0}} alt={item.code} />
+                  <span style={{marginLeft:'10px', fontWeight:'bold', display: 'inline-block', width: '60px', textAlign: 'left'}}>{item.code}</span>
                 </div>
                 <div className="box-style">
                   {activeIdx === idx ? displayValue : amounts[idx]}
