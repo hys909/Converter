@@ -3,6 +3,8 @@
   --box-bg: #333333;
   --accent-color: #ff9f0a;
   --text-color: #ffffff;
+  --func-bg: #a5a5a5;
+  --key-bg: #505050;
 }
 
 body {
@@ -10,29 +12,120 @@ body {
   color: var(--text-color);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  height: 100dvh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 20px 20px;
+}
+
+.currency-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+.currency-item {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  height: 50px;
+  align-items: center;
+  background: transparent;
 }
 
 .box-style {
   background: var(--box-bg);
   border-radius: 12px;
-  padding: 10px 14px;
   display: flex;
-  align-items: center;
-  height: 65px;
+  align-items: center; /* 強制垂直置中 */
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  height: 100%;
 }
 
-.currency-list { display: flex; flex-direction: column; gap: 8px; }
-.currency-item { display: flex; gap: 8px; margin-bottom: 8px; cursor: pointer; padding: 0 30px; }
-.currency-item > div { height: 65px; border-radius: 16px; display: flex; align-items: center; }
-.currency-item .box-style:first-child { flex: 0 0 110px; justify-content: flex-start; padding-left: 15px; }
-.currency-item .box-style:last-child { flex: 1; justify-content: flex-end; padding-right: 20px; font-family: monospace; font-size: 1.6rem; }
-.active-row .box-style { background: #a67c00 !important; }
-.header-icons { display: flex; gap: 15px; font-size: 1.4rem; }
-.keypad { position: fixed; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(4, 1fr) !important; gap: 6px; padding: 10px 30px; padding-bottom: 30px; background-color: var(--bg-color); z-index: 1000; }
-.keypad button { flex: 1; height: 50px; border-radius: 12px; font-size: 1.5rem; color: #fff; border: none; cursor: pointer; }
-.func-key { background-color: #a5a5a5; border: none; border-radius: 16px; height: 65px; color: #000; font-size: 1.8rem; font-weight: 500; }
-.ops-key { background-color: #ff9f0a; border: none; border-radius: 16px; height: 65px; color: white; font-size: 1.8rem; font-weight: 500; }
+.active-row .box-style {
+  background: #5c4d30;
+}
 
-.search-bar { width: 100%; padding: 12px; border-radius: 12px; background: #333; border: none; color: #fff; margin-bottom: 20px; box-sizing: border-box; }
-.selector-row { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #222; cursor: pointer; }
+.currency-item .box-style:first-child {
+  flex: 0 0 100px; /* 固定寬度，確保左右對齊更穩固 */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10px;
+}
+
+.currency-item .box-style:first-child span {
+  display: inline-block;
+  text-align: left;
+  width: 50px;
+}
+
+.currency-item .box-style:last-child {
+  flex: 1;
+  justify-content: flex-end; /* 強制靠右對齊，確保數值呈現一致 */
+  font-family: monospace;
+  border-radius: 12px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 5px 15px 20px 15px;
+  background-color: var(--bg-color);
+}
+
+.keypad button {
+  height: 35px;
+  border-radius: 17px;
+  font-size: 1.1rem;
+  color: #fff;
+  border: none;
+  background-color: var(--key-bg);
+  cursor: pointer;
+}
+
+.keypad button.ops-key {
+  background-color: var(--accent-color);
+}
+
+.keypad button.func-key {
+  background-color: var(--func-bg);
+  color: #000;
+}
+
+.keypad button.zero-key {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: 25px;
+}
+
+.selector-page {
+  height: 100dvh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.selector-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
