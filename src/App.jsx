@@ -6,6 +6,17 @@ import { currencies } from './constants/currencies';
 
 function App() {
   const [page, setPage] = useState('main');
+  const [clickCount, setClickCount] = useState(() => {
+    const saved = localStorage.getItem('appClickCount');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
+  useEffect(() => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+    localStorage.setItem('appClickCount', newCount.toString());
+  }, []);
+
   const [selectedRow, setSelectedRow] = useState(null);
   const [currencyData, setCurrencyData] = useState([
     { code: 'TWD', flag: 'tw' }, { code: 'USD', flag: 'us' },
@@ -100,7 +111,7 @@ function App() {
             </div>
             <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace', display: 'flex', justifyContent: 'space-between'}}>
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
-                <span>點擊率: 0</span>
+                <span>點擊率: {clickCount}</span>
             </div>
           </header>
           
