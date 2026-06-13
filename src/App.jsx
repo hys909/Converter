@@ -98,8 +98,9 @@ function App() {
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
               <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Taiwan</div>
             </div>
-            <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace'}}>
+            <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace', display: 'flex', justifyContent: 'space-between'}}>
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
+                <span>點擊率: 0</span>
             </div>
           </header>
           
