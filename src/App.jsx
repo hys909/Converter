@@ -12,7 +12,7 @@ function App() {
     { code: 'JPY', flag: 'jp' }, { code: 'CNY', flag: 'cn' }, { code: 'KRW', flag: 'kr' }
   ]);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [displayValue, setDisplayValue] = useState('1000');
+  const [displayValue, setDisplayValue] = useState('1');
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }));
   const [rates, setRates] = useState({ TWD: 1 });
 
@@ -35,7 +35,7 @@ function App() {
     });
   };
 
-  const [amounts, setAmounts] = useState(calculateAmounts('1000'));
+  const [amounts, setAmounts] = useState(calculateAmounts('1'));
 
   useEffect(() => {
     const twdAmount = activeIdx === 0 ? displayValue : (parseFloat(displayValue.replace(/,/g, '')) / (rates[currencyData[activeIdx].code] || 1));
@@ -86,7 +86,7 @@ function App() {
 
   const selectRow = (idx) => {
     setActiveIdx(idx);
-    setDisplayValue('1000');
+    setDisplayValue('1');
     setIsNewInput(true);
   };
 
