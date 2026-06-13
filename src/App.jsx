@@ -95,7 +95,7 @@ function App() {
       {page === 'main' ? (
         <div id="main-page">
           <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'25px', padding:'0 30px'}}>
-            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
               <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Taiwan</div>
             </div>
             <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace'}}>
