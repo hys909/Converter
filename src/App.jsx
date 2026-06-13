@@ -111,7 +111,7 @@ function App() {
             </div>
             <div style={{fontSize:'1.1rem', color:'#4cd964', fontFamily:'monospace', display: 'flex', justifyContent: 'space-between'}}>
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
-                <span>點擊率: {clickCount}</span>
+                <span>瀏覽人數: {clickCount}</span>
             </div>
           </header>
           
