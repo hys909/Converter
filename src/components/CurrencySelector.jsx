@@ -12,7 +12,7 @@ export default function CurrencySelector({ onSelect, onClose }) {
     <div className="selector-page">
       <div className="selector-header" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', position: 'relative' }}>
         <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '1.5rem', position: 'absolute', left: '0' }}>〈</button>
-        <h2 style={{ flex: 1, textAlign: 'center', margin: '0' }}>貨幣</h2>
+        <h2 style={{ flex: 1, textAlign: 'center', margin: '0', fontSize: '1.6rem' }}>貨幣</h2>
       </div>
       <input 
         type="text" 
@@ -20,16 +20,16 @@ export default function CurrencySelector({ onSelect, onClose }) {
         placeholder="搜尋" 
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        style={{width:'100%', padding:'12px', borderRadius:'12px', background:'#333', border:'none', color:'#fff', marginBottom:'20px'}}
+        style={{width:'100%', padding:'16px', borderRadius:'12px', background:'#333', border:'none', color:'#fff', marginBottom:'20px', fontSize:'1.4rem'}}
       />
       <div className="selector-list">
         {filtered.map(c => (
-          <div key={c.code} className="selector-row" onClick={() => onSelect(c)} style={{display:'flex', alignItems:'center', padding:'15px 0', borderBottom:'1px solid #222', cursor:'pointer'}}>
-            <span style={{marginRight:'10px', visibility:'hidden'}}>      </span>
-            <img src={`https://flagcdn.com/w40/${c.flag}.png`} width="32" height="32" style={{borderRadius:'50%', marginRight:'10px'}} alt={c.code} />
-            <span style={{flex:1, textAlign:'left', paddingLeft:'5px'}}>{c.name}</span>
-            <span style={{fontFamily:'Courier New, monospace', fontWeight:'bold'}}>{c.code}</span>
-          </div>
+            <div key={c.code} className="selector-row" onClick={() => onSelect(c)} style={{display:'flex', alignItems:'center', padding:'20px 0', borderBottom:'1px solid #222', cursor:'pointer', fontSize:'1.4rem'}}>
+              <span style={{marginRight:'10px', visibility:'hidden'}}>      </span>
+              <img src={`https://flagcdn.com/w40/${c.flag}.png`} width="48" height="48" style={{borderRadius:'50%', marginRight:'15px', objectFit: 'cover', flexShrink: 0}} alt={c.code} />
+              <span style={{flex:1, textAlign:'left', paddingLeft:'5px'}}>{c.name}</span>
+              <span style={{fontFamily:'Courier New, monospace', fontWeight:'bold'}}>{c.code}</span>
+            </div>
         ))}
       </div>
     </div>
