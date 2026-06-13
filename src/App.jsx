@@ -110,7 +110,7 @@ function App() {
             {currencyData.map((item, idx) => (
               <div key={idx} className={`currency-item ${activeIdx === idx ? 'active-row' : ''}`} onClick={() => selectRow(idx)}>
                 <div className="box-style" onClick={() => { setSelectedRow(idx); setPage('selector'); }}>
-                  <img src={`https://flagcdn.com/w40/${item.flag}.png`} width="32" height="32" style={{borderRadius:'50%'}} alt={item.code} />
+                  <img src={`https://flagcdn.com/w40/${item.flag}.png`} width="32" height="32" style={{borderRadius:'50%', objectFit: 'cover', flexShrink: 0}} alt={item.code} />
                   <span style={{marginLeft:'10px', fontWeight:'bold'}}>{item.code}</span>
                 </div>
                 <div className="box-style">
