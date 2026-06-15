@@ -162,7 +162,7 @@ function App() {
               </div>
             ))}
           </div>
-          <div style={{height: '5px'}}></div>
+          <div style={{height: '2px'}}></div>
           <Calculator onKeypad={handleKeypad} />
         </div>
       ) : (
