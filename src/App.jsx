@@ -149,7 +149,7 @@ function App() {
             </div>
           </header>
           
-          <div className="currency-list" style={{ flex: 1, overflowY: "auto", paddingBottom: "10px" }}>
+          <div className="currency-list" style={{ flex: 1, overflowY: "auto", paddingBottom: "5px" }}>
             {currencyData.map((item, idx) => (
               <div key={idx} className={`currency-item ${activeIdx === idx ? 'active-row' : ''}`} onClick={() => selectRow(idx)}>
                 <div className="box-style" onClick={() => { setSelectedRow(idx); setPage('selector'); }}>
@@ -162,6 +162,7 @@ function App() {
               </div>
             ))}
           </div>
+          <div style={{height: '5px'}}></div>
           <Calculator onKeypad={handleKeypad} />
         </div>
       ) : (
