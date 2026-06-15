@@ -24,7 +24,7 @@ function App() {
   ]);
   const [activeIdx, setActiveIdx] = useState(0);
   const [displayValue, setDisplayValue] = useState('1');
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }));
+  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }));
   const [rates, setRates] = useState({ TWD: 1 });
 
   useEffect(() => {
@@ -34,8 +34,8 @@ function App() {
       .catch(err => console.error("匯率獲取失敗:", err));
       
     const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }));
-    }, 60000);
+      setCurrentTime(new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }));
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
