@@ -84,9 +84,9 @@ function App() {
     } 
     else if (key === '=') {
       try { 
-        const expression = displayValue.replace(/×/g, '*').replace(/÷/g, '/');
-        const result = eval(expression);
-        setDisplayValue(result.toString()); 
+        const cleanExpression = displayValue.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/');
+        const result = eval(cleanExpression);
+        setDisplayValue(Number(result).toLocaleString()); 
         setIsNewInput(true);
       } catch { 
         setDisplayValue('Error'); 
