@@ -65,7 +65,7 @@ function App() {
   const handleKeypad = (key) => {
     if (key >= '0' && key <= '9' || key === '.') {
       if (isNewInput) {
-          setDisplayValue(key === '.' ? '0.' : key);
+          setDisplayValue(key === '.' ? '0.' : formatThousands(key));
           setIsNewInput(false);
       } else {
           setDisplayValue(prev => {
