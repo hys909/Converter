@@ -28,7 +28,7 @@ function App() {
   const [rates, setRates] = useState({ TWD: 1 });
 
   useEffect(() => {
-    fetch('https://api.exchangerate-api.com/v4/latest/TWD')
+    fetch('https://api.frankfurter.app/latest?from=TWD')
       .then(res => res.json())
       .then(data => setRates(data.rates))
       .catch(err => console.error("匯率獲取失敗:", err));
