@@ -66,7 +66,10 @@ function App() {
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
       setIsNewInput(false);
-      setDisplayValue(prev => prev.replace(/,/g, '') + key);
+      setDisplayValue(prev => {
+        const cleaned = prev.replace(/,/g, '');
+        return cleaned + key;
+      });
     }
     else if (key === '%') {
       setDisplayValue(prev => {
