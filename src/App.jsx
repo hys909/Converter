@@ -61,14 +61,13 @@ function App() {
           setDisplayValue(key === '.' ? '0.' : Number(key).toLocaleString());
           setIsNewInput(false);
       } else {
-          // 修正：檢查最後一個字元是否為運算子，若是，則將新數字 append 到算式字串後
-          const lastChar = prev.slice(-1);
-          if (['+', '-', '×', '÷'].includes(lastChar)) {
-              setDisplayValue(prev + key);
-          } else {
-              // 否則，移除所有逗號後與新數字串接，再重新格式化
-              setDisplayValue((parseFloat(prev.replace(/,/g, '') + key)).toLocaleString());
-          }
+          setDisplayValue(prev => {
+              const lastChar = prev.slice(-1);
+              if (['+', '-', '×', '÷'].includes(lastChar)) {
+                  return prev + key;
+              }
+              return (parseFloat(prev.replace(/,/g, '') + key)).toLocaleString();
+          });
       }
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
