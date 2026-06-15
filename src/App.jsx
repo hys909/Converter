@@ -49,10 +49,21 @@ function App() {
   const [amounts, setAmounts] = useState(calculateAmounts('1'));
 
   useEffect(() => {
-    // 運算前必須移除逗號，否則 parseFloat 會在逗號處截斷
-    const rawDisplay = displayValue.replace(/,/g, '');
-    const twdAmount = activeIdx === 0 ? rawDisplay : (parseFloat(rawDisplay) / (rates[currencyData[activeIdx].code] || 1));
-    setAmounts(calculateAmounts(twdAmount));
+    // 運算前必須移除逗號並處理可能的運算式
+    const cleanDisplay = displayValue.replace(/,/g, '');
+    let twdAmount;
+    
+    try {
+      // 若包含運算符，先計算出結果，否則直接解析
+      const expression = cleanDisplay.replace(/×/g, '*').replace(/÷/g, '/');
+      twdAmount = eval(expression);
+    } catch {
+      twdAmount = parseFloat(cleanDisplay) || 0;
+    }
+    
+    // 計算匯率
+    const baseTwd = activeIdx === 0 ? twdAmount : (twdAmount / (rates[currencyData[activeIdx].code] || 1));
+    setAmounts(calculateAmounts(baseTwd));
   }, [displayValue, activeIdx, currencyData, rates]);
 
   const [isNewInput, setIsNewInput] = useState(true);
