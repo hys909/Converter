@@ -66,7 +66,7 @@ function App() {
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
       setIsNewInput(false);
-      setDisplayValue(prev => prev + key);
+      setDisplayValue(prev => prev.replace(/,/g, '') + key);
     }
     else if (key === '%') {
       setDisplayValue(prev => {
