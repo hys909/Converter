@@ -136,7 +136,7 @@ function App() {
     <div className="app-container-v2">
       {page === 'main' ? (
         <div id="main-page">
-          <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'25px', padding:'0 30px'}}>
+          <header className="header" style={{display:'flex', flexDirection:'column', marginBottom:'15px', padding:'0 30px'}}>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
               <div style={{fontSize:'1.8rem', fontWeight:'bold', marginBottom:'8px'}}>Converter Taiwan</div>
             </div>
@@ -144,7 +144,7 @@ function App() {
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
                 <span>瀏覽人數: {clickCount}</span>
             </div>
-            <div style={{fontSize:'0.7rem', color:'#888', marginTop:'4px', textAlign:'right'}}>
+            <div style={{fontSize:'0.7rem', color:'#888', marginTop:'2px', textAlign:'right'}}>
                 * 顯示市場中價位匯率
             </div>
           </header>
