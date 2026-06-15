@@ -49,7 +49,9 @@ function App() {
   const [amounts, setAmounts] = useState(calculateAmounts('1'));
 
   useEffect(() => {
-    const twdAmount = activeIdx === 0 ? displayValue : (parseFloat(displayValue) / (rates[currencyData[activeIdx].code] || 1));
+    // 運算前必須移除逗號，否則 parseFloat 會在逗號處截斷
+    const rawDisplay = displayValue.replace(/,/g, '');
+    const twdAmount = activeIdx === 0 ? rawDisplay : (parseFloat(rawDisplay) / (rates[currencyData[activeIdx].code] || 1));
     setAmounts(calculateAmounts(twdAmount));
   }, [displayValue, activeIdx, currencyData, rates]);
 
