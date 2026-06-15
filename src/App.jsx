@@ -144,6 +144,9 @@ function App() {
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
                 <span>瀏覽人數: {clickCount}</span>
             </div>
+            <div style={{fontSize:'0.7rem', color:'#888', marginTop:'4px', textAlign:'right'}}>
+                * 顯示市場中價位匯率
+            </div>
           </header>
           
           <div className="currency-list" style={{ flex: 1, overflowY: "auto", paddingBottom: "10px" }}>
