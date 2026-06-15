@@ -61,21 +61,12 @@ function App() {
           setDisplayValue(key === '.' ? '0.' : Number(key).toLocaleString());
           setIsNewInput(false);
       } else {
-          setDisplayValue(prev => {
-              const lastChar = prev.slice(-1);
-              if (['+', '-', '×', '÷'].includes(lastChar)) {
-                  return prev + key;
-              }
-              return (parseFloat(prev.replace(/,/g, '') + key)).toLocaleString();
-          });
+          setDisplayValue(prev => (parseFloat(prev.replace(/,/g, '') + key)).toLocaleString());
       }
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
       setIsNewInput(false);
-      setDisplayValue(prev => {
-        const cleaned = prev.replace(/,/g, '');
-        return cleaned + key;
-      });
+      setDisplayValue(prev => prev + key);
     }
     else if (key === '%') {
       setDisplayValue(prev => {
@@ -93,9 +84,9 @@ function App() {
     } 
     else if (key === '=') {
       try { 
-        const cleanExpression = displayValue.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/');
-        const result = eval(cleanExpression);
-        setDisplayValue(Number(result).toLocaleString()); 
+        const expression = displayValue.replace(/×/g, '*').replace(/÷/g, '/');
+        const result = eval(expression);
+        setDisplayValue(result.toString()); 
         setIsNewInput(true);
       } catch { 
         setDisplayValue('Error'); 
