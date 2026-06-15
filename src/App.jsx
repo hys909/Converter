@@ -142,7 +142,7 @@ function App() {
             </div>
             <div style={{fontSize:'1.0rem', color:'#4cd964', fontFamily:'monospace', display: 'flex', justifyContent: 'space-between'}}>
                 {new Date().toLocaleDateString('zh-TW')} {currentTime}
-                <span>瀏覽人數: {clickCount}</span>
+                <span>* 市場中價位匯率</span>
             </div>
           </header>
           
