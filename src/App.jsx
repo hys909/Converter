@@ -55,38 +55,56 @@ function App() {
 
   const [isNewInput, setIsNewInput] = useState(true);
 
+  const formatThousands = (numStr) => {
+    // 分離小數點與整數
+    const parts = numStr.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join('.');
+  };
+
   const handleKeypad = (key) => {
     if (key >= '0' && key <= '9' || key === '.') {
       if (isNewInput) {
           setDisplayValue(key === '.' ? '0.' : key);
           setIsNewInput(false);
       } else {
-          setDisplayValue(prev => prev === '0' && key !== '.' ? key : prev + key);
+          setDisplayValue(prev => {
+              const cleanPrev = prev.replace(/,/g, '');
+              const nextVal = cleanPrev === '0' && key !== '.' ? key : cleanPrev + key;
+              return formatThousands(nextVal);
+          });
       }
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
       setIsNewInput(false);
-      setDisplayValue(prev => prev + key);
+      // 輸入運算符時不自動加逗號，但在顯示上保持原狀
+      setDisplayValue(prev => prev.replace(/,/g, '') + key);
     }
     else if (key === '%') {
       setDisplayValue(prev => {
-        const parts = prev.split(/[\+\-×÷]/);
+        const cleanPrev = prev.replace(/,/g, '');
+        const parts = cleanPrev.split(/[\+\-×÷]/);
         const lastPart = parts[parts.length - 1];
         const processed = (parseFloat(lastPart) / 100).toString();
-        return prev.slice(0, -lastPart.length) + processed;
+        return formatThousands(cleanPrev.slice(0, -lastPart.length) + processed);
       });
     }
     else if (key === 'C') {
       setDisplayValue('0');
       setIsNewInput(true);
     } else if (key === '←') {
-      setDisplayValue(prev => prev.length > 1 ? prev.slice(0, -1) : '0');
+      setDisplayValue(prev => {
+        const cleanPrev = prev.replace(/,/g, '');
+        const newExpr = cleanPrev.length > 1 ? cleanPrev.slice(0, -1) : '0';
+        return formatThousands(newExpr);
+      });
     } 
     else if (key === '=') {
       try { 
-        const expression = displayValue.replace(/×/g, '*').replace(/÷/g, '/');
-        const result = eval(expression);
-        setDisplayValue(result.toString()); 
+        // 運算前強制移除所有逗號
+        const cleanExpr = displayValue.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/');
+        const result = eval(cleanExpr);
+        setDisplayValue(formatThousands(result.toString())); 
         setIsNewInput(true);
       } catch { 
         setDisplayValue('Error'); 
