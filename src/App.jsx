@@ -58,10 +58,10 @@ function App() {
   const handleKeypad = (key) => {
     if (key >= '0' && key <= '9' || key === '.') {
       if (isNewInput) {
-          setDisplayValue(key === '.' ? '0.' : Number(key).toLocaleString());
+          setDisplayValue(key === '.' ? '0.' : key);
           setIsNewInput(false);
       } else {
-          setDisplayValue(prev => (parseFloat(prev.replace(/,/g, '') + key)).toLocaleString());
+          setDisplayValue(prev => prev === '0' && key !== '.' ? key : prev + key);
       }
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
