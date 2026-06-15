@@ -61,7 +61,13 @@ function App() {
           setDisplayValue(key === '.' ? '0.' : Number(key).toLocaleString());
           setIsNewInput(false);
       } else {
-          setDisplayValue(prev => (parseFloat(prev.replace(/,/g, '') + key)).toLocaleString());
+          // 如果上一個字元是運算子，允許輸入新數字，否則追加
+          const lastChar = prev.slice(-1);
+          if (['+', '-', '×', '÷'].includes(lastChar)) {
+              setDisplayValue(Number(key).toLocaleString());
+          } else {
+              setDisplayValue(prev => (parseFloat(prev.replace(/,/g, '') + key)).toLocaleString());
+          }
       }
     } 
     else if (['+', '-', '×', '÷'].includes(key)) {
