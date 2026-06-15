@@ -49,7 +49,7 @@ function App() {
   const [amounts, setAmounts] = useState(calculateAmounts('1'));
 
   useEffect(() => {
-    const twdAmount = activeIdx === 0 ? displayValue : (parseFloat(displayValue.replace(/,/g, '')) / (rates[currencyData[activeIdx].code] || 1));
+    const twdAmount = activeIdx === 0 ? displayValue : (parseFloat(displayValue) / (rates[currencyData[activeIdx].code] || 1));
     setAmounts(calculateAmounts(twdAmount));
   }, [displayValue, activeIdx, currencyData, rates]);
 
